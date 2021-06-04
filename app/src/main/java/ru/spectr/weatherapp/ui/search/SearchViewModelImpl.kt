@@ -7,7 +7,6 @@ import com.github.terrakok.cicerone.Router
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import ru.spectr.core_network.data.Repository
-import ru.spectr.core_network.metaweaher.MetaWeatherApi
 import ru.spectr.core_network.metaweaher.models.Location
 import ru.spectr.weatherapp.ui.Screens.Search.SEARCH_RESULT_KEY
 import ru.spectr.weatherapp.ui.components.search_item.SearchItem
@@ -17,7 +16,6 @@ import toothpick.InjectConstructor
 @InjectConstructor
 class SearchViewModelImpl(
     private val router: Router,
-    private val api: MetaWeatherApi,
     private val repository: Repository
 ) : ViewModel(), SearchViewModel {
     override val items = MutableLiveData<List<SearchItem>>()
@@ -31,7 +29,7 @@ class SearchViewModelImpl(
         job = viewModelScope.launch {
             try {
                 val favorites = repository.getFavorites()
-                val locations = api.searchByName(query)
+                val locations = repository.searchByName(query)
                 items.value = locations.map {
                     it.toSearchItem(favorites.find { favorite -> favorite.woeid == it.woeid } != null)
                 }

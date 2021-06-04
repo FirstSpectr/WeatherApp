@@ -7,13 +7,8 @@ import ru.spectr.weatherapp.ui.favorites.FavoritesFragment
 import ru.spectr.weatherapp.ui.map.MapFragment
 import ru.spectr.weatherapp.ui.overview.OverViewFragment
 import ru.spectr.weatherapp.ui.search.SearchFragment
-import ru.spectr.weatherapp.ui.splash.SplashFragment
 
 object Screens {
-    object Splash : FragmentScreen {
-        override fun createFragment(factory: FragmentFactory): Fragment = SplashFragment()
-    }
-
     object Main : FragmentScreen {
         override fun createFragment(factory: FragmentFactory): Fragment = OverViewFragment()
     }
