@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">WeatherApp</string>
+
+    <string name="action_search">search</string>
+    <string name="action_locate">locate on map</string>
+    <string name="action_favorites">favorites</string>
+    <string name="action_my_location">my location</string>
+
+    <string name="nothings_found">Nothing found</string>
+
+    <string name="humidity_info">Humidity: %1$d%%</string>
+    <string name="pressure_info">Pressure: %1$d hPa</string>
+    <string name="wind_info">Wind: %1$.1f m/s</string>
+    <string name="search_hint">City or state</string>
+
+    <string name="permission_message">Need permissions</string>
+    <string name="grant">Grant</string>
+    <string name="favorites">Favorites</string>
+    <string name="map_alert_message">Want to see the weather for this point?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+</resources>

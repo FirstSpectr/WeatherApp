@@ -1,0 +1,19 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+
+dependencies {
+    implementation project(':core')
+
+    //Retrofit
+    implementation 'com.google.code.gson:gson:2.8.6'
+    implementation "com.squareup.okhttp3:okhttp:4.9.0"
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+    implementation 'com.squareup.okhttp3:logging-interceptor:4.8.1'
+    implementation 'com.google.android.gms:play-services-maps:17.0.1'
+    debugImplementation "com.github.chuckerteam.chucker:library:3.4.0"
+    releaseImplementation "com.github.chuckerteam.chucker:library-no-op:3.4.0"
+
+    kapt 'com.github.stephanenicolas.toothpick:toothpick-compiler:3.1.0'
+}
