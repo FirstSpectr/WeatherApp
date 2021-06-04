@@ -3,6 +3,7 @@ package ru.spectr.core_network.data
 import android.content.SharedPreferences
 import com.google.gson.Gson
 import ru.spectr.core_network.metaweaher.MetaWeatherApi
+import ru.spectr.core_network.metaweaher.models.ForecastResponse
 import ru.spectr.core_network.metaweaher.models.Location
 import toothpick.InjectConstructor
 
@@ -31,4 +32,10 @@ class RepositoryImpl(private val api: MetaWeatherApi, private val sharedPreferen
         if (favoritesJson?.isEmpty() == true) return listOf()
         return Gson().fromJson(favoritesJson, Array<Location>::class.java).toList()
     }
+
+    override suspend fun searchByCord(lattLong: String): List<Location> = api.searchByCord(lattLong)
+
+    override suspend fun searchByName(name: String): List<Location> = api.searchByName(name)
+
+    override suspend fun getData(woeid: Int): ForecastResponse = api.getData(woeid)
 }
