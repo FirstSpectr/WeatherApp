@@ -24,4 +24,9 @@
     <string name="c">Ясно</string>
     <string name="unknown">Неизвестно</string>
     <string name="error_message">Не удалось получить текущие координаты</string>
+    <string name="action_add_to_favorite">Добавить в избранное</string>
+    <string name="action_favorites" translatable="false">Избранное</string>
+    <string name="action_my_location" translatable="false">Моё местоположение</string>
+    <string name="action_locate" translatable="false">Выбрать на карте</string>
+    <string name="action_search" translatable="false">Поиск</string>
 </resources>
