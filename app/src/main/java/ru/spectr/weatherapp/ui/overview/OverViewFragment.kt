@@ -79,7 +79,9 @@ class OverViewFragment : Fragment(R.layout.fragment_overview) {
             ivMyLocation.setOnClickListener {
                 if (ContextCompat.checkSelfPermission(requireContext(), ACCESS_COARSE_LOCATION) == PERMISSION_GRANTED) {
                     locationProviderClient.lastLocation.addOnSuccessListener {
-                        viewModel.onMyLocationClick(LatLng(it.latitude, it.longitude))
+                        it?.let {
+                            viewModel.onMyLocationClick(LatLng(it.latitude, it.longitude))
+                        }
                     }
                 } else {
                     requestPermissionLauncher.launch(ACCESS_COARSE_LOCATION)

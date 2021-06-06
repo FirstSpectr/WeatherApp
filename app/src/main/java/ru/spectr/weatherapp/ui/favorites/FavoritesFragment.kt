@@ -44,7 +44,7 @@ class FavoritesFragment : Fragment(R.layout.fragment_favorites) {
             recycler.adapter = adapter
 
             recycler.addItemDecoration(DividerItemDecoration(recycler.context, (recycler.layoutManager as LinearLayoutManager).orientation))
-
+            toolbar.setNavigationOnClickListener { viewModel.onBackPressed() }
             with(viewModel) {
                 items.observe(viewLifecycleOwner) {
                     adapter.items = it

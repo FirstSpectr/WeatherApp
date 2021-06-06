@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.github.terrakok.cicerone.Router
 import kotlinx.coroutines.launch
-import ru.spectr.core.extensions.FORMAT_dd_MMMM
+import ru.spectr.core.extensions.FORMAT_HH_mm
 import ru.spectr.core.extensions.format
 import ru.spectr.core.resources.ResourceProvider
 import ru.spectr.core_data.Repo
@@ -38,7 +38,11 @@ class DayViewModelImpl(
         viewModelScope.launch {
             try {
                 val data = repo.getForecastForDay(dayArguments.woeid, dayArguments.date)
-                items.value = data.map { it.toForecastItem() }
+                Timber.d("SIZE IS ${data.size}")
+                val step = 60 / (data.size / 24) * 60 * 1000
+                items.value = data.mapIndexed { index, forecast ->
+                    forecast.toForecastItem(forecast.date + index * step)
+                }
             } catch (e: Exception) {
                 Timber.e(e)
             }
@@ -50,11 +54,11 @@ class DayViewModelImpl(
 
     override fun onBackPressed() = router.exit()
 
-    private fun Forecast.toForecastItem() = ForecastItem(
+    private fun Forecast.toForecastItem(time: Long) = ForecastItem(
         id = id,
         payload = this,
         temp = "${temp.roundToInt()}℃",
-        date = date.format(FORMAT_dd_MMMM),
+        date = time.format(FORMAT_HH_mm),
         weatherType = WeatherType.find(weatherType),
         tempMin = "${tempMin.roundToInt()}℃",
         humidity = rp.getString(R.string.humidity_info, humidity),

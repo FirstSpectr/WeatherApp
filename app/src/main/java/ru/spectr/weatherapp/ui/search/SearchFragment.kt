@@ -47,7 +47,7 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
             recycler.addItemDecoration(dividerItemDecoration)
 
             etSearch.addTextChangedListener { viewModel.onQueryChanged(it.toString()) }
-
+            toolbar.setNavigationOnClickListener { viewModel.onBackPressed() }
             with(viewModel) {
                 progressVisible.observe(viewLifecycleOwner) { progressBar.isVisible = it }
 

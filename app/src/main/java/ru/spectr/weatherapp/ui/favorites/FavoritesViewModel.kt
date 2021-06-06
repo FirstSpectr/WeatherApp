@@ -8,4 +8,5 @@ interface FavoritesViewModel {
 
     fun onLocationSelected(item: SearchItem)
     fun onFavIconClick(item: SearchItem)
+    fun onBackPressed()
 }

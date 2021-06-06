@@ -18,11 +18,11 @@ fun forecastAdapterDelegate(onClick: ((ForecastItem) -> Unit)? = null): AdapterD
             bind {
                 tvDate.text = item.date
                 tvTemperature.text = item.temp
-                ivWeatherIcon.setImageResource(item.weatherType.resId)
+                ivWeatherIcon.setImageResource(item.weatherType.iconResId)
                 tvTempMin.text = item.tempMin
                 tvHumidity.text = item.humidity
                 tvPressure.text = item.pressure
-                tvDescription.text = item.description
+                tvDescription.setText(item.weatherType.descResId)
                 tvWindSpeed.text = item.windSpeed
             }
         }

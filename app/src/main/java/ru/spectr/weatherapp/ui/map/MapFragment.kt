@@ -1,10 +1,12 @@
 package ru.spectr.weatherapp.ui.map
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.view.View
+import android.view.WindowManager
 import android.widget.RelativeLayout
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -34,11 +36,20 @@ class MapFragment : Fragment(R.layout.fragment_map), OnMapReadyCallback {
             .inject(this)
     }
 
+    @Suppress("DEPRECATION")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        requireActivity().window.addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN)
         (childFragmentManager.findFragmentById(R.id.container) as SupportMapFragment).getMapAsync(this)
     }
 
+    @Suppress("DEPRECATION")
+    override fun onDestroyView() {
+        super.onDestroyView()
+        requireActivity().window.clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN)
+    }
+
+    @SuppressLint("ResourceType")
     override fun onMapReady(googleMap: GoogleMap) {
         if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED)
             googleMap.isMyLocationEnabled = true

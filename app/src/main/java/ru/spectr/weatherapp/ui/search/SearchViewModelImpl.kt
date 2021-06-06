@@ -58,6 +58,8 @@ class SearchViewModelImpl(
         }
     }
 
+    override fun onBackPressed() = router.exit()
+
     private fun Location.toSearchItem() = SearchItem(
         id = woeid,
         payload = this,

@@ -30,7 +30,7 @@ class OverviewModelImpl(
 ) : ViewModel(), OverViewModel {
     override val currentLocation = MutableLiveData<String>()
     override val items = MutableLiveData<List<ForecastItem>>()
-    override val isRefreshing = MutableLiveData(true)
+    override val isRefreshing = MutableLiveData(false)
     override val progressVisible = MutableLiveData(true)
 
     private var lastWoeid = 2122265
@@ -43,6 +43,7 @@ class OverviewModelImpl(
     private fun loadForecasts(woeid: Int) {
         lastWoeid = woeid
         progressVisible.value = true
+        items.value = listOf()
         viewModelScope.launch {
             try {
                 val data = repo.getForecast(woeid)
@@ -102,7 +103,15 @@ class OverviewModelImpl(
 
     override fun onForecastClick(item: ForecastItem) {
         val forecast = item.payload as Forecast
-        router.navigateTo(Screens.Day(DayArguments(lastWoeid, forecast.date.format(FORMAT_yyyy_MM_dd), currentLocation.value.orEmpty())))
+        router.navigateTo(
+            Screens.Day(
+                DayArguments(
+                    woeid = lastWoeid,
+                    date = forecast.date.format(FORMAT_yyyy_MM_dd),
+                    title = "${currentLocation.value.orEmpty()} ${item.date}"
+                )
+            )
+        )
     }
 
     private fun Forecast.toForecastItem() = ForecastItem(

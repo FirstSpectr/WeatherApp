@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">WeatherApp</string>
+    <string name="nothings_found">Ничего не найдено</string>
+    <string name="humidity_info">Влажность: %1$d%%</string>
+    <string name="pressure_info">Давление: %1$d мм. рт. ст.</string>
+    <string name="wind_info">Скорость ветра: %1$.1f м/с</string>
+    <string name="search_hint">Поиск</string>
+    <string name="permission_message">Нужны разрешения</string>
+    <string name="grant">Выдать</string>
+    <string name="favorites">Избранное</string>
+    <string name="map_alert_message">Хотите увидеть погоду для этой точки?</string>
+    <string name="yes">Да</string>
+    <string name="no">Нет</string>
+    <string name="sn">Снег</string>
+    <string name="sl">Мокрый снег</string>
+    <string name="h">Град</string>
+    <string name="t">Гроза</string>
+    <string name="hr">Сильный дождь</string>
+    <string name="lr">Легкий дождь</string>
+    <string name="s">Ливень</string>
+    <string name="hc">Облачно</string>
+    <string name="lc">Малооблачно</string>
+    <string name="c">Ясно</string>
+    <string name="unknown">Неизвестно</string>
+</resources>

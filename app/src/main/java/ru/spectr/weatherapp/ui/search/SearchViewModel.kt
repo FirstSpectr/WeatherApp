@@ -10,4 +10,5 @@ interface SearchViewModel {
     fun onQueryChanged(query: String)
     fun onLocationSelected(item: SearchItem)
     fun onFavIconClick(item: SearchItem)
+    fun onBackPressed()
 }
