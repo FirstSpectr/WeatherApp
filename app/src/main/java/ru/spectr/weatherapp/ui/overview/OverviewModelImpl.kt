@@ -10,8 +10,8 @@ import ru.spectr.core.extensions.FORMAT_dd_MMMM
 import ru.spectr.core.extensions.format
 import ru.spectr.core.extensions.toDate
 import ru.spectr.core.resources.ResourceProvider
-import ru.spectr.core_network.data.Repository
-import ru.spectr.core_network.metaweaher.models.ConsolidatedWeather
+import ru.spectr.core_data.Repo
+import ru.spectr.core_network.models.ConsolidatedWeather
 import ru.spectr.weatherapp.R
 import ru.spectr.weatherapp.ui.Screens
 import ru.spectr.weatherapp.ui.components.forecast.ForecastItem
@@ -24,8 +24,8 @@ import kotlin.math.roundToInt
 @InjectConstructor
 class OverviewModelImpl(
     private val router: Router,
-    private val repository: Repository,
-    private val rp: ResourceProvider
+    private val rp: ResourceProvider,
+    private val repo: Repo
 ) : ViewModel(), OverViewModel {
     override val currentLocation = MutableLiveData<String>()
     override val items = MutableLiveData<List<ForecastItem>>()
@@ -43,7 +43,7 @@ class OverviewModelImpl(
         progressVisible.value = true
         viewModelScope.launch {
             try {
-                val data = repository.getData(woeid)
+                val data = repo.getData(woeid)
                 currentLocation.value = data.title
                 items.value = data.consolidated_weather?.map { it.toForecast() }.orEmpty()
                 progressVisible.value = false
@@ -64,7 +64,7 @@ class OverviewModelImpl(
             if (it !is LatLng) return@setResultListener
             viewModelScope.launch {
                 try {
-                    val nearLocation = repository.searchByCord("${it.latitude},${it.longitude}").firstOrNull() ?: return@launch
+                    val nearLocation = repo.getLocationsByCord(it).firstOrNull() ?: return@launch
                     loadForecasts(nearLocation.woeid)
                 } catch (e: Exception) {
                     Timber.e(e)
@@ -92,7 +92,7 @@ class OverviewModelImpl(
     override fun onMyLocationClick(lng: LatLng) {
         viewModelScope.launch {
             try {
-                val nearLocation = repository.searchByCord("${lng.latitude},${lng.longitude}").firstOrNull() ?: return@launch
+                val nearLocation = repo.getLocationsByCord(lng).firstOrNull() ?: return@launch
                 loadForecasts(nearLocation.woeid)
             } catch (e: Exception) {
                 Timber.e(e)

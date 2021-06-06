@@ -4,11 +4,11 @@ import androidx.recyclerview.widget.AsyncDifferConfig
 import androidx.recyclerview.widget.DiffUtil
 
 data class SearchItem(
-    val id: Int,
-    val payload: Any,
-    val title: String,
-    val locationType: String,
-    val isFavorite: Boolean
+    val id: Int = -1,
+    val payload: Any? = null,
+    val title: String = "",
+    val locationType: String = "",
+    val isFavorite: Boolean = false
 ) {
     companion object {
         private val DIFF = object : DiffUtil.ItemCallback<SearchItem>() {

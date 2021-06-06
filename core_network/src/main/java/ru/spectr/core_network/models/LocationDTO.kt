@@ -1,6 +1,6 @@
-package ru.spectr.core_network.metaweaher.models
+package ru.spectr.core_network.models
 
-data class Location(
+data class LocationDTO(
     val title: String,
     val location_type: String,
     val woeid: Int,

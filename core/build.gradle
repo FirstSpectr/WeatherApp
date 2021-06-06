@@ -38,4 +38,8 @@ dependencies {
 
     //Cicerone
     api "com.github.terrakok:cicerone:7.0"
+
+    //Maps
+    api 'com.google.android.gms:play-services-maps:17.0.1'
+    api 'com.google.android.gms:play-services-location:18.0.0'
 }

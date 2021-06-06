@@ -1,6 +1,8 @@
 package ru.spectr.weatherapp
 
 import android.app.Application
+import ru.spectr.core_data.di.DataModule
+import ru.spectr.core_db.di.DBModule
 import ru.spectr.core_network.di.NetworkModule
 import timber.log.Timber
 import toothpick.Scope
@@ -23,7 +25,9 @@ class App : Application() {
     private fun initDi() {
         scope = KTP.openScope(this).installModules(
             AppModule(this@App),
-            NetworkModule()
+            DBModule(),
+            NetworkModule(),
+            DataModule()
         )
     }
 

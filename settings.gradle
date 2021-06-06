@@ -1,4 +1,6 @@
 rootProject.name = "WheatherApp"
 include ':core'
 include ':core_network'
+include ':core_db'
+include ':core_data'
 include ':app'

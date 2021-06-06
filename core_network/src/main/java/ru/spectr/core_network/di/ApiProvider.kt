@@ -1,7 +1,7 @@
 package ru.spectr.core_network.di
 
 import retrofit2.Retrofit
-import ru.spectr.core_network.metaweaher.MetaWeatherApi
+import ru.spectr.core_network.MetaWeatherApi
 import toothpick.InjectConstructor
 import javax.inject.Provider
 

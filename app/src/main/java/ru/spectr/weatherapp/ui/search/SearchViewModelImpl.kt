@@ -6,8 +6,8 @@ import androidx.lifecycle.viewModelScope
 import com.github.terrakok.cicerone.Router
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
-import ru.spectr.core_network.data.Repository
-import ru.spectr.core_network.metaweaher.models.Location
+import ru.spectr.core_data.Repo
+import ru.spectr.core_data.models.Location
 import ru.spectr.weatherapp.ui.Screens.Search.SEARCH_RESULT_KEY
 import ru.spectr.weatherapp.ui.components.search_item.SearchItem
 import timber.log.Timber
@@ -16,7 +16,7 @@ import toothpick.InjectConstructor
 @InjectConstructor
 class SearchViewModelImpl(
     private val router: Router,
-    private val repository: Repository
+    private val repo: Repo
 ) : ViewModel(), SearchViewModel {
     override val items = MutableLiveData<List<SearchItem>>()
     override val progressVisible = MutableLiveData(false)
@@ -28,11 +28,7 @@ class SearchViewModelImpl(
         job?.cancel()
         job = viewModelScope.launch {
             try {
-                val favorites = repository.getFavorites()
-                val locations = repository.searchByName(query)
-                items.value = locations.map {
-                    it.toSearchItem(favorites.find { favorite -> favorite.woeid == it.woeid } != null)
-                }
+                items.value = repo.getLocationsByName(query).map { it.toSearchItem() }
             } catch (e: Exception) {
                 items.value = listOf()
                 Timber.e(e)
@@ -49,11 +45,9 @@ class SearchViewModelImpl(
     override fun onFavIconClick(item: SearchItem) {
         viewModelScope.launch {
             try {
-                if (item.isFavorite) {
-                    repository.removeFromFavorites(item.id)
-                } else {
-                    repository.saveToFavorites(item.payload as Location)
-                }
+                if (item.isFavorite) repo.removeFromFavorites(item.id)
+                else repo.addToFavorites(item.payload as Location)
+
                 val newList = items.value?.toMutableList() ?: return@launch
                 val index = newList.indexOf(item)
                 newList[index] = item.copy(isFavorite = !item.isFavorite)
@@ -64,11 +58,11 @@ class SearchViewModelImpl(
         }
     }
 
-    private fun Location.toSearchItem(isFavorite: Boolean) = SearchItem(
+    private fun Location.toSearchItem() = SearchItem(
         id = woeid,
         payload = this,
         title = title,
-        locationType = location_type,
+        locationType = locationType,
         isFavorite = isFavorite
     )
 }

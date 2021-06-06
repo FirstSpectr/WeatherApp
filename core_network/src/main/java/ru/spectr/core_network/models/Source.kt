@@ -1,4 +1,4 @@
-package ru.spectr.core_network.metaweaher.models
+package ru.spectr.core_network.models
 
 data class Source(
     val crawl_rate: Int?,
