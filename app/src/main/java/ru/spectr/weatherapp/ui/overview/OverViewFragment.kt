@@ -59,7 +59,9 @@ class OverViewFragment : Fragment(R.layout.fragment_overview) {
     private val requestPermissionLauncher = registerForActivityResult(ActivityResultContracts.RequestPermission()) {
         if (it) {
             locationProviderClient.lastLocation.addOnSuccessListener { location ->
-                viewModel.onMyLocationClick(LatLng(location.latitude, location.longitude))
+                location?.let {
+                    viewModel.onMyLocationClick(LatLng(location.latitude, location.longitude))
+                } ?: showErrorSnack()
             }
         } else {
             Snackbar.make(binding.root, R.string.permission_message, BaseTransientBottomBar.LENGTH_LONG)
@@ -81,7 +83,7 @@ class OverViewFragment : Fragment(R.layout.fragment_overview) {
                     locationProviderClient.lastLocation.addOnSuccessListener {
                         it?.let {
                             viewModel.onMyLocationClick(LatLng(it.latitude, it.longitude))
-                        }
+                        } ?: showErrorSnack()
                     }
                 } else {
                     requestPermissionLauncher.launch(ACCESS_COARSE_LOCATION)
@@ -101,6 +103,9 @@ class OverViewFragment : Fragment(R.layout.fragment_overview) {
             }
         }
     }
+
+    private fun showErrorSnack() = Snackbar.make(binding.root, R.string.error_message, BaseTransientBottomBar.LENGTH_SHORT)
+        .show()
 
     private fun getAppSettingsIntent(): Intent {
         val intent = Intent()

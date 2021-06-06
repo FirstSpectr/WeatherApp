@@ -23,4 +23,5 @@
     <string name="lc">Малооблачно</string>
     <string name="c">Ясно</string>
     <string name="unknown">Неизвестно</string>
+    <string name="error_message">Не удалось получить текущие координаты</string>
 </resources>
