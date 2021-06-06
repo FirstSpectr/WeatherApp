@@ -3,7 +3,7 @@ package ru.spectr.weatherapp.ui.map
 import androidx.lifecycle.ViewModel
 import com.github.terrakok.cicerone.Router
 import com.google.android.gms.maps.model.LatLng
-import ru.spectr.weatherapp.ui.Screens.Map.MAP_RESULT_KEY
+import ru.spectr.weatherapp.navigation.Screens.Map.MAP_RESULT_KEY
 import toothpick.InjectConstructor
 
 @InjectConstructor

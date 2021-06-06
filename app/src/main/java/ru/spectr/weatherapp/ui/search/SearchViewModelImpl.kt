@@ -8,7 +8,7 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import ru.spectr.core_data.Repo
 import ru.spectr.core_data.models.Location
-import ru.spectr.weatherapp.ui.Screens.Search.SEARCH_RESULT_KEY
+import ru.spectr.weatherapp.navigation.Screens.Search.SEARCH_RESULT_KEY
 import ru.spectr.weatherapp.ui.components.search_item.SearchItem
 import timber.log.Timber
 import toothpick.InjectConstructor

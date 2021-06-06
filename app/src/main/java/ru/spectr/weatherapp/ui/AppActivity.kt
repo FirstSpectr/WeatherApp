@@ -6,6 +6,7 @@ import com.github.terrakok.cicerone.NavigatorHolder
 import com.github.terrakok.cicerone.Router
 import com.github.terrakok.cicerone.androidx.AppNavigator
 import ru.spectr.weatherapp.R
+import ru.spectr.weatherapp.navigation.Screens
 import toothpick.ktp.KTP
 import toothpick.ktp.delegate.inject
 

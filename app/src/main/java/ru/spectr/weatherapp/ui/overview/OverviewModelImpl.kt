@@ -7,13 +7,14 @@ import com.github.terrakok.cicerone.Router
 import com.google.android.gms.maps.model.LatLng
 import kotlinx.coroutines.launch
 import ru.spectr.core.extensions.FORMAT_dd_MMMM
+import ru.spectr.core.extensions.FORMAT_yyyy_MM_dd
 import ru.spectr.core.extensions.format
-import ru.spectr.core.extensions.toDate
 import ru.spectr.core.resources.ResourceProvider
 import ru.spectr.core_data.Repo
-import ru.spectr.core_network.models.ConsolidatedWeather
+import ru.spectr.core_data.models.Forecast
 import ru.spectr.weatherapp.R
-import ru.spectr.weatherapp.ui.Screens
+import ru.spectr.weatherapp.navigation.DayArguments
+import ru.spectr.weatherapp.navigation.Screens
 import ru.spectr.weatherapp.ui.components.forecast.ForecastItem
 import ru.spectr.weatherapp.ui.components.forecast.WeatherType
 import timber.log.Timber
@@ -29,10 +30,11 @@ class OverviewModelImpl(
 ) : ViewModel(), OverViewModel {
     override val currentLocation = MutableLiveData<String>()
     override val items = MutableLiveData<List<ForecastItem>>()
-    override val progressVisible = MutableLiveData(true)
     override val isRefreshing = MutableLiveData(true)
+    override val progressVisible = MutableLiveData(true)
 
     private var lastWoeid = 2122265
+//    private var lastLocationInformation:
 
     init {
         loadForecasts(2122265)
@@ -43,9 +45,9 @@ class OverviewModelImpl(
         progressVisible.value = true
         viewModelScope.launch {
             try {
-                val data = repo.getData(woeid)
+                val data = repo.getForecast(woeid)
                 currentLocation.value = data.title
-                items.value = data.consolidated_weather?.map { it.toForecast() }.orEmpty()
+                items.value = data.forecasts.map { it.toForecastItem() }
                 progressVisible.value = false
             } catch (e: Exception) {
                 Timber.e(e)
@@ -54,9 +56,7 @@ class OverviewModelImpl(
         }
     }
 
-    override fun onRefresh() {
-        loadForecasts(lastWoeid)
-    }
+    override fun onRefresh() = loadForecasts(lastWoeid)
 
     override fun onLocateOnMapClick() {
         router.navigateTo(Screens.Map)
@@ -100,15 +100,21 @@ class OverviewModelImpl(
         }
     }
 
-    private fun ConsolidatedWeather.toForecast() = ForecastItem(
-        id = id ?: 0L,
-        temp = "${the_temp?.roundToInt()}℃",
-        date = applicable_date?.toDate(ConsolidatedWeather.DATE_PATTERN)?.format(FORMAT_dd_MMMM).orEmpty(),
-        weatherType = WeatherType.find(weather_state_abbr),
-        tempMin = "${min_temp?.roundToInt()}℃",
-        humidity = rp.getString(R.string.humidity_info, humidity ?: 0),
-        pressure = rp.getString(R.string.pressure_info, air_pressure?.roundToInt() ?: 0),
-        description = weather_state_name.orEmpty(),
-        windSpeed = rp.getString(R.string.wind_info, wind_speed ?: 0),
+    override fun onForecastClick(item: ForecastItem) {
+        val forecast = item.payload as Forecast
+        router.navigateTo(Screens.Day(DayArguments(lastWoeid, forecast.date.format(FORMAT_yyyy_MM_dd), currentLocation.value.orEmpty())))
+    }
+
+    private fun Forecast.toForecastItem() = ForecastItem(
+        id = id,
+        payload = this,
+        temp = "${temp.roundToInt()}℃",
+        date = date.format(FORMAT_dd_MMMM),
+        weatherType = WeatherType.find(weatherType),
+        tempMin = "${tempMin.roundToInt()}℃",
+        humidity = rp.getString(R.string.humidity_info, humidity),
+        pressure = rp.getString(R.string.pressure_info, pressure.roundToInt()),
+        description = description,
+        windSpeed = rp.getString(R.string.wind_info, windSpeed),
     )
 }

@@ -39,7 +39,9 @@ class OverViewFragment : Fragment(R.layout.fragment_overview) {
     private val adapter by lazy {
         AsyncListDifferDelegationAdapter(
             ForecastItem.config,
-            forecastAdapterDelegate()
+            forecastAdapterDelegate(
+                onClick = viewModel::onForecastClick
+            )
         )
     }
 
@@ -53,6 +55,7 @@ class OverViewFragment : Fragment(R.layout.fragment_overview) {
         setHasOptionsMenu(true)
     }
 
+    @SuppressLint("MissingPermission")
     private val requestPermissionLauncher = registerForActivityResult(ActivityResultContracts.RequestPermission()) {
         if (it) {
             locationProviderClient.lastLocation.addOnSuccessListener { location ->

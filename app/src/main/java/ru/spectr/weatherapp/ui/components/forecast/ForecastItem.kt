@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.DiffUtil
 
 data class ForecastItem(
     val id: Long,
+    val payload: Any?,
     val temp: String,
     val tempMin: String,
     val date: String,

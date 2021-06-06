@@ -5,8 +5,8 @@ import com.google.android.gms.maps.model.LatLng
 import ru.spectr.weatherapp.ui.components.forecast.ForecastItem
 
 interface OverViewModel {
-    val currentLocation: LiveData<String>
     val items: LiveData<List<ForecastItem>>
+    val currentLocation: LiveData<String>
     val progressVisible: LiveData<Boolean>
     val isRefreshing: LiveData<Boolean>
 
@@ -15,4 +15,5 @@ interface OverViewModel {
     fun onSearchClick()
     fun onFavoritesClick()
     fun onMyLocationClick(lng: LatLng)
+    fun onForecastClick(item: ForecastItem)
 }

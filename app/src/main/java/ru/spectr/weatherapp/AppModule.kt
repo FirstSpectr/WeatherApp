@@ -21,5 +21,6 @@ class AppModule(application: Application) : Module() {
         bind<ResourceProvider>().toClass<ResourceProviderImpl>().singleton()
         bind<FusedLocationProviderClient>().toInstance(LocationServices.getFusedLocationProviderClient(application))
         bind<Context>().toInstance(application)
+        bind<Application>().toInstance(application)
     }
 }

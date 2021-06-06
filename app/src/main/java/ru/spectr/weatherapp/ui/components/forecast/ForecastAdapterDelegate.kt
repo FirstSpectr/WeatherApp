@@ -4,13 +4,15 @@ import com.hannesdorfmann.adapterdelegates4.AdapterDelegate
 import com.hannesdorfmann.adapterdelegates4.dsl.adapterDelegateViewBinding
 import ru.spectr.weatherapp.databinding.ItemForecastBinding
 
-fun forecastAdapterDelegate(): AdapterDelegate<List<ForecastItem>> {
+fun forecastAdapterDelegate(onClick: (ForecastItem) -> Unit = {}): AdapterDelegate<List<ForecastItem>> {
     return adapterDelegateViewBinding(
         viewBinding = { layoutInflater, root ->
             ItemForecastBinding.inflate(layoutInflater, root, false)
         }
     ) {
         with(binding) {
+            binding.root.setOnClickListener { onClick(item) }
+
             bind {
                 tvDate.text = item.date
                 tvTemperature.text = item.temp
