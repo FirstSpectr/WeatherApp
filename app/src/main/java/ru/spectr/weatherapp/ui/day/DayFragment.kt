@@ -54,6 +54,8 @@ class DayFragment : Fragment(R.layout.fragment_day) {
             recycler.adapter = adapter
             recycler.addItemDecoration(DividerItemDecoration(recycler.context, (recycler.layoutManager as LinearLayoutManager).orientation))
 
+            toolbar.setNavigationOnClickListener { viewModel.onBackPressed() }
+
             with(viewModel) {
                 isRefreshing.observe(viewLifecycleOwner, swipeRefresh::setRefreshing)
                 items.observe(viewLifecycleOwner) { adapter.items = it }

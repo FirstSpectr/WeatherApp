@@ -15,4 +15,21 @@
         <item name="android:windowTranslucentStatus">true</item>
         <item name="android:windowTranslucentNavigation">true</item>
     </style>
+
+
+    <style name="ToolbarStyle" parent="Widget.MaterialComponents.Toolbar">
+        <item name="titleTextAppearance">@style/ToolbarTitleTextAppearance</item>
+    </style>
+
+    <style name="ToolbarStyle.Navigation">
+        <item name="navigationIcon">@drawable/ic_back</item>
+        <item name="contentInsetEnd">0dp</item>
+        <item name="contentInsetStart">0dp</item>
+        <item name="contentInsetStartWithNavigation">0dp</item>
+        <item name="titleMargin">0dp</item>
+    </style>
+
+    <style name="ToolbarTitleTextAppearance">
+        <item name="android:textSize">20sp</item>
+    </style>
 </resources>
