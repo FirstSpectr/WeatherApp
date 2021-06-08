@@ -1,3 +1,3 @@
 # WeatherApp
 
-Release build: https://drive.google.com/file/d/1KNd3_LdC7OU4vpUvwwiUIyvsga1ttki_/view?usp=sharing
+Release build: https://drive.google.com/drive/folders/1ZDbFiCObyMlu9edw9OTPUj0hVgYe-zJe?usp=sharing
