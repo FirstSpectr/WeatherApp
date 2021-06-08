@@ -23,7 +23,7 @@ class DayFragment : Fragment(R.layout.fragment_day) {
     private val viewModel: DayViewModel by inject<DayViewModelImpl>()
     private val binding by viewBinding(FragmentDayBinding::bind)
 
-    private val adapter by lazy {
+    private val adapter by lazy(mode = LazyThreadSafetyMode.NONE) {
         AsyncListDifferDelegationAdapter(
             ForecastItem.config,
             forecastAdapterDelegate()
@@ -42,7 +42,6 @@ class DayFragment : Fragment(R.layout.fragment_day) {
             .installVMBinding<DayViewModelImpl>(this)
             .closeOnViewModelCleared(this)
             .inject(this)
-        setHasOptionsMenu(true)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -68,7 +67,7 @@ class DayFragment : Fragment(R.layout.fragment_day) {
         private const val ARGUMENTS_KEY = "ARGUMENTS_KEY"
 
         fun newInstance(args: DayArguments) = DayFragment().apply {
-            arguments = Bundle().apply {
+            arguments = Bundle(1).apply {
                 putParcelable(ARGUMENTS_KEY, args)
             }
         }
