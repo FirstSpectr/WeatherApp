@@ -16,5 +16,3 @@ local.properties
 .idea/*
 
 build/
-
-release_keystore.properties
