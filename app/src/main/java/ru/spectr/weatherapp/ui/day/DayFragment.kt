@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.hannesdorfmann.adapterdelegates4.AsyncListDifferDelegationAdapter
-import ru.spectr.core.installVMBinding
+import ru.spectr.core.extensions.installVMBinding
 import ru.spectr.weatherapp.R
 import ru.spectr.weatherapp.databinding.FragmentDayBinding
 import ru.spectr.weatherapp.navigation.DayArguments

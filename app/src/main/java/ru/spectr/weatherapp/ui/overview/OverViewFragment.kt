@@ -20,7 +20,7 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.material.snackbar.BaseTransientBottomBar
 import com.google.android.material.snackbar.Snackbar
 import com.hannesdorfmann.adapterdelegates4.AsyncListDifferDelegationAdapter
-import ru.spectr.core.installVMBinding
+import ru.spectr.core.extensions.installVMBinding
 import ru.spectr.weatherapp.BuildConfig
 import ru.spectr.weatherapp.R
 import ru.spectr.weatherapp.databinding.FragmentOverviewBinding

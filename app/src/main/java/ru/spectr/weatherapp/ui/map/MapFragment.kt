@@ -15,7 +15,7 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.MarkerOptions
-import ru.spectr.core.installVMBinding
+import ru.spectr.core.extensions.installVMBinding
 import ru.spectr.weatherapp.R
 import ru.spectr.weatherapp.databinding.FragmentMapBinding
 import toothpick.ktp.KTP

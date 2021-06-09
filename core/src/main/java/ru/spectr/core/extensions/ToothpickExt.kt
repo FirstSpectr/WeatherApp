@@ -1,4 +1,4 @@
-package ru.spectr.core
+package ru.spectr.core.extensions
 
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
