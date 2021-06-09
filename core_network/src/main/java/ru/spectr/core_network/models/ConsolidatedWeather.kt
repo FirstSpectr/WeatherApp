@@ -2,39 +2,37 @@ package ru.spectr.core_network.models
 
 import com.google.gson.annotations.SerializedName
 
+const val APPLICABLE_DATE_PATTERN = "yyyy-MM-dd"
+
 data class ConsolidatedWeather(
     @SerializedName("id")
     val id: Long?,
     @SerializedName("air_pressure")
-    val air_pressure: Float?,
+    val airPressure: Float?,
     @SerializedName("applicable_date")
-    val applicable_date: String?,
+    val applicableDate: String?,
     @SerializedName("created")
     val created: String?,
     @SerializedName("humidity")
     val humidity: Int?,
     @SerializedName("max_temp")
-    val max_temp: Float?,
+    val maxTemp: Float?,
     @SerializedName("min_temp")
-    val min_temp: Float?,
+    val minTemp: Float?,
     @SerializedName("predictability")
     val predictability: Int?,
     @SerializedName("the_temp")
-    val the_temp: Float?,
+    val theTemp: Float?,
     @SerializedName("visibility")
     val visibility: Float?,
     @SerializedName("weather_state_abbr")
-    val weather_state_abbr: String?,
+    val weatherStateAbbr: String?,
     @SerializedName("weather_state_name")
-    val weather_state_name: String?,
+    val weatherStateName: String?,
     @SerializedName("wind_direction")
-    val wind_direction: Float?,
+    val windDirection: Float?,
     @SerializedName("wind_direction_compass")
-    val wind_direction_compass: String?,
+    val windDirectionCompass: String?,
     @SerializedName("wind_speed")
-    val wind_speed: Float?
-) {
-    companion object {
-        const val DATE_PATTERN = "yyyy-MM-dd"
-    }
-}
+    val windSpeed: Float?
+)

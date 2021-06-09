@@ -26,7 +26,7 @@ class RepoImpl(
 
     override suspend fun getLocationsByCord(latLng: LatLng): List<Location> {
         val favorites = weatherDb.locationDao().getAll()
-        val locations = weatherApi.searchByCord(lattLong = "${latLng.latitude},${latLng.longitude}")
+        val locations = weatherApi.searchByCord(latLng = "${latLng.latitude},${latLng.longitude}")
         return locations.map { location -> location.toLocationVo(favorites.find { location.woeid == it.woeid } != null) }
     }
 

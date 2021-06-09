@@ -4,25 +4,25 @@ import com.google.gson.annotations.SerializedName
 
 data class ForecastResponse(
     @SerializedName("consolidated_weather")
-    val consolidated_weather: List<ConsolidatedWeather>?,
+    val consolidatedWeather: List<ConsolidatedWeather>?,
     @SerializedName("latt_long")
-    val latt_long: String?,
+    val lattLong: String?,
     @SerializedName("location_type")
-    val location_type: String?,
+    val locationType: String?,
     @SerializedName("parent")
     val parent: LocationDTO?,
     @SerializedName("sources")
     val sources: List<Source>?,
     @SerializedName("sun_rise")
-    val sun_rise: String?,
+    val sunRise: String?,
     @SerializedName("sun_set")
-    val sun_set: String?,
+    val sunSet: String?,
     @SerializedName("time")
     val time: String?,
     @SerializedName("timezone")
     val timezone: String?,
     @SerializedName("timezone_name")
-    val timezone_name: String?,
+    val timezoneName: String?,
     @SerializedName("title")
     val title: String?,
     @SerializedName("woeid")

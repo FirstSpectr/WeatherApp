@@ -10,11 +10,11 @@ import ru.spectr.core_network.models.LocationDTO
 interface MetaWeatherApi {
     /**
      * Returns a distance-sorted list of the location next to the coordinates
-     * @param lattLong Coordinates to search for locations near. Comma separated lattitude and longitude e.g. "36.96,-122.02".
+     * @param latLng Coordinates to search for locations near. Comma separated lattitude and longitude e.g. "36.96,-122.02".
      * @return list of [LocationDTO] with distance field
      */
     @GET("location/search")
-    suspend fun searchByCord(@Query("lattlong") lattLong: String): List<LocationDTO>
+    suspend fun searchByCord(@Query("lattlong") latLng: String): List<LocationDTO>
 
     /**
      * Returns the locations matches to query

@@ -8,8 +8,8 @@ import ru.spectr.core_network.models.LocationDTO
 fun LocationDTO.toLocationVo(isInFavorites: Boolean = false) = Location(
     woeid = woeid,
     title = title,
-    locationType = location_type,
-    lattLong = latt_long,
+    locationType = locationType,
+    lattLong = lattLong,
     isFavorite = isInFavorites
 )
 

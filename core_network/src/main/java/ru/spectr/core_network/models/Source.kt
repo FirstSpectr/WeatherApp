@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName
 
 data class Source(
     @SerializedName("crawl_rate")
-    val crawl_rate: Int?,
+    val crawlRate: Int?,
     @SerializedName("slug")
     val slug: String?,
     @SerializedName("title")

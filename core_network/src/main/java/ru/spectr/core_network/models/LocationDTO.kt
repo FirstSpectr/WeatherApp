@@ -6,9 +6,9 @@ data class LocationDTO(
     @SerializedName("title")
     val title: String,
     @SerializedName("location_type")
-    val location_type: String,
+    val locationType: String,
     @SerializedName("woeid")
     val woeid: Int,
     @SerializedName("latt_long")
-    val latt_long: String
+    val lattLong: String
 )
